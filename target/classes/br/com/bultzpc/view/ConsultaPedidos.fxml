@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.com.bultzpc.controller.ConsultaPedidosController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1a1a1d" height="540.0" layoutX="-2.0" stroke="BLACK" strokeType="INSIDE" width="104.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#1a1a1d" height="540.0" layoutX="-2.0" stroke="BLACK" strokeType="INSIDE" style="-fx-arc-height: 20.0; -fx-arc-width: 10.0;" width="185.0" />
+      <Button fx:id="btnFuncionarios" layoutX="13.0" layoutY="120.0" mnemonicParsing="false" onAction="#btnFuncionarios_Click" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: Transparent;" text="Funcionarios" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnClientes" layoutX="13.0" layoutY="300.0" mnemonicParsing="false" onAction="#btnClientes_Click" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: Transparent;" text="Clientes" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnProdutos" layoutX="13.0" layoutY="180.0" mnemonicParsing="false" onAction="#btnProdutos_Click" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: Transparent;" text="Produtos" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+         <font>
+            <Font name="Segoe UI" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnMenu" layoutX="13.0" layoutY="60.0" mnemonicParsing="false" onAction="#btnMenu_Click" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: Transparent;" text="Menu" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="22.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnSair" layoutX="49.0" layoutY="458.0" mnemonicParsing="false" onAction="#btnSair_click" prefHeight="38.0" prefWidth="79.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%);" text="Sair" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="20.0" />
+         </font>
+      </Button>
+      <Button fx:id="btnPedidos" layoutX="13.0" layoutY="240.0" mnemonicParsing="false" onAction="#btnPedidos_Click" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: Transparent;" text="Pedidos" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="22.0" />
+         </font>
+      </Button>
+      <Label layoutX="301.0" layoutY="82.0" prefHeight="25.0" prefWidth="65.0" text="Codigo:">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCodigo" layoutX="384.0" layoutY="82.0" onKeyPressed="#txtCodigo_lostFocusTab" prefHeight="28.0" prefWidth="170.0" style="-fx-background-color: #C0C1C4;">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="txtCPF" layoutX="640.0" layoutY="82.0" onKeyPressed="#txtCPF_lostFocusTab" prefHeight="28.0" prefWidth="220.0" style="-fx-background-color: #C0C1C4;">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </TextField>
+      <Label layoutX="584.0" layoutY="84.0" text="CPF:">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Label>
+      <TableView layoutX="284.0" layoutY="184.0" prefHeight="200.0" prefWidth="597.0">
+        <columns>
+          <TableColumn prefWidth="75.0" text="C1" />
+          <TableColumn prefWidth="75.0" text="C2" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnConsulta" layoutX="30.0" layoutY="346.0" mnemonicParsing="false" prefHeight="77.0" prefWidth="121.0" style="-fx-background-color: Transparent;" text="Consulta avançada" wrapText="true">
+         <font>
+            <Font name="Segoe UI" size="22.0" />
+         </font>
+         <textFill>
+            <LinearGradient endX="1.0" endY="1.0">
+               <stops>
+                  <Stop color="#741845" />
+                  <Stop color="#741845" offset="0.13405797101449277" />
+                  <Stop color="#a64d79" offset="0.8043478260869565" />
+                  <Stop color="#a64d79" offset="1.0" />
+               </stops>
+            </LinearGradient>
+         </textFill>
+      </Button>
+   </children>
+</AnchorPane>
