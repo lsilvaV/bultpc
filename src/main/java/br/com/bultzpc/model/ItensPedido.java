@@ -1,114 +1,83 @@
 package br.com.bultzpc.model;
 
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-
-/**
- *
- * @author
- */
 public class ItensPedido {
-
-    private final SimpleBooleanProperty selecionado;
-    private final SimpleIntegerProperty id;
-    private final SimpleIntegerProperty pedidoId;
-    private final SimpleIntegerProperty produtoId;
-    private final SimpleIntegerProperty quantidade;
-    private final SimpleFloatProperty preco;
+    private int id, pedidoId, produtoId, quantidade;
+    private float preco;
     
-    
-    // Construtor padrão
+    // Construtor
     public ItensPedido() {
-        this.selecionado = new SimpleBooleanProperty(false);
-        this.id = new SimpleIntegerProperty(0);
-        this.pedidoId = new SimpleIntegerProperty(0);
-        this.produtoId = new SimpleIntegerProperty(0);
-        this.quantidade = new SimpleIntegerProperty(0);
-        this.preco = new SimpleFloatProperty(0.0f);
+        
     }
-
-    // Construtor com parâmetros
+    
     public ItensPedido(int id, int pedidoId, int produtoId, int quantidade, float preco) {
-        this.selecionado = new SimpleBooleanProperty(false);
-        this.id = new SimpleIntegerProperty(id);
-        this.pedidoId = new SimpleIntegerProperty(pedidoId);
-        this.produtoId = new SimpleIntegerProperty(produtoId);
-        this.quantidade = new SimpleIntegerProperty(quantidade);
-        this.preco = new SimpleFloatProperty(preco);
+        this.id = id;
+        this.pedidoId = pedidoId;
+        this.produtoId = produtoId;
+        this.quantidade = quantidade;
+        this.preco = preco;
+    }
+    
+    // Equals e Hashcode
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 19 * hash + Float.floatToIntBits(this.preco);
+        return hash;
     }
 
-    // Retorna as propriedades
-    public SimpleBooleanProperty selecionadoProperty() {
-        return selecionado;
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final ItensPedido other = (ItensPedido) obj;
+        return Float.floatToIntBits(this.preco) == Float.floatToIntBits(other.preco);
     }
 
-    public SimpleIntegerProperty idProperty() {
+    // Getters e Setters
+    public int getId() {
         return id;
     }
 
-    public SimpleIntegerProperty pedidoIdProperty() {
-        return pedidoId;
-    }
-
-    public SimpleIntegerProperty produtoIdProperty() {
-        return produtoId;
-    }
-
-    public SimpleIntegerProperty quantidadeProperty() {
-        return quantidade;
-    }
-
-    public SimpleFloatProperty precoProperty() {
-        return preco;
-    }
-
-    // Getters e Setters do model
-    public boolean isSelecionado() {
-        return selecionado.get();
-    }
-
-    public void setSelecionado(boolean selecionado) {
-        this.selecionado.set(selecionado);
-    }
-
-    public int getId() {
-        return id.get();
-    }
-
     public void setId(int id) {
-        this.id.set(id);
+        this.id = id;
     }
 
     public int getPedidoId() {
-        return pedidoId.get();
+        return pedidoId;
     }
 
     public void setPedidoId(int pedidoId) {
-        this.pedidoId.set(pedidoId);
+        this.pedidoId = pedidoId;
     }
 
     public int getProdutoId() {
-        return produtoId.get();
+        return produtoId;
     }
 
     public void setProdutoId(int produtoId) {
-        this.produtoId.set(produtoId);
+        this.produtoId = produtoId;
     }
 
     public int getQuantidade() {
-        return quantidade.get();
+        return quantidade;
     }
 
     public void setQuantidade(int quantidade) {
-        this.quantidade.set(quantidade);
+        this.quantidade = quantidade;
     }
 
     public float getPreco() {
-        return preco.get();
+        return preco;
     }
 
     public void setPreco(float preco) {
-        this.preco.set(preco);
+        this.preco = preco;
     }
 }

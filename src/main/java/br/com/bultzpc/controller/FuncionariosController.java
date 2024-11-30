@@ -24,6 +24,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -49,6 +50,7 @@ public class FuncionariosController implements Initializable{
     @FXML
     private Button btnConsulta;
     @FXML
+
     private TextField txtCPF;
     @FXML
     private TextField txtNome;
@@ -57,6 +59,7 @@ public class FuncionariosController implements Initializable{
     @FXML
     private TextField txtSalario;
     @FXML
+
     private Button btnDeletar;
     @FXML
     private Button btnAlterar;
@@ -64,6 +67,16 @@ public class FuncionariosController implements Initializable{
     private Button btnPesquisar;
     @FXML
     private Button btnCadastrar;
+    @FXML
+    private TableColumn<?, ?> colunaNome;
+    @FXML
+    private TableColumn<?, ?> colunaCPF;
+    @FXML
+    private TableColumn<?, ?> colunaDataNasc;
+    @FXML
+    private TableColumn<?, ?> colunaCargo;
+    @FXML
+    private TableColumn<?, ?> colunaSalario;
 
     private ArrayList<Funcionario> funcionarios = new ArrayList<>();
     private Funcionario funcionario;
@@ -225,6 +238,7 @@ public class FuncionariosController implements Initializable{
             mensagem("Erro na busca\n" + ex.getMessage());
         }
     }
+
 
     @FXML
     private void btnDeletar_Click(ActionEvent event) {

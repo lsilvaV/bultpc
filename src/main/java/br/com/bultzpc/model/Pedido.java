@@ -84,7 +84,4 @@ public class Pedido {
     public void setTotal(Float total) {
         this.total = total;
     }
-    
-    
-    
 }

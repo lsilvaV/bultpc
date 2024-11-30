@@ -59,85 +59,90 @@
             <Font name="Segoe UI" size="20.0" />
          </font>
       </Button>
-      <Label layoutX="440.0" layoutY="59.0" text="Tela de Pedidos" textAlignment="CENTER">
+      <Label layoutX="431.0" layoutY="48.0" text="Tela de Pedidos" textAlignment="CENTER">
          <font>
             <Font name="Segoe UI Semibold" size="30.0" />
          </font>
       </Label>
-      <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="856.0" layoutY="581.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="90.0" fitWidth="90.0" layoutX="856.0" layoutY="601.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@assets/logo90.png" />
          </image>
       </ImageView>
-      <Button fx:id="btnCadastrar" disable="true" layoutX="780.0" layoutY="525.0" mnemonicParsing="false" onAction="#btnCadastrar_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Cadastrar" textFill="WHITE">
+      <Button fx:id="btnCadastrar" disable="true" layoutX="704.0" layoutY="556.0" mnemonicParsing="false" onAction="#btnCadastrar_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Cadastrar" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnDeletar" disable="true" layoutX="656.0" layoutY="525.0" mnemonicParsing="false" onAction="#btnDeletar_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Deletar" textFill="WHITE">
-         <font>
-            <Font name="Segoe UI" size="16.0" />
-         </font>
-      </Button>
-      <TableView layoutX="591.0" layoutY="181.0" prefHeight="323.0" prefWidth="362.0">
+      <TableView fx:id="tableView" layoutX="584.0" layoutY="173.0" prefHeight="365.0" prefWidth="362.0">
         <columns>
-          <TableColumn prefWidth="31.0" />
-          <TableColumn fx:id="colunaItem" editable="false" prefWidth="121.0" text="Item" />
+          <TableColumn minWidth="0.0" prefWidth="0.0" />
+          <TableColumn fx:id="colunaItem" editable="false" prefWidth="152.0" text="Item" />
             <TableColumn fx:id="colunaPreco" editable="false" prefWidth="78.0" text="Preço" />
-            <TableColumn fx:id="colunaQtd" editable="false" prefWidth="116.0" text="Quantidade" />
+            <TableColumn fx:id="colunaQtd" editable="false" prefWidth="131.0" text="Quantidade" />
         </columns>
       </TableView>
-      <ComboBox fx:id="cmbCategoria" layoutX="321.0" layoutY="199.0" prefHeight="31.0" prefWidth="253.0" />
-      <Label layoutX="227.0" layoutY="202.0" text="Categoria:">
+      <ComboBox fx:id="cmbCategoria" layoutX="319.0" layoutY="174.0" prefHeight="31.0" prefWidth="253.0" />
+      <Label layoutX="225.0" layoutY="177.0" text="Categoria:">
          <font>
             <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <Label layoutX="255.0" layoutY="303.0" text="Preço:">
+      <Label layoutX="253.0" layoutY="278.0" text="Preço:">
          <font>
             <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtPreco" disable="true" layoutX="321.0" layoutY="301.0" prefHeight="28.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
+      <TextField fx:id="txtPreco" disable="true" layoutX="319.0" layoutY="276.0" prefHeight="28.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="262.0" layoutY="254.0" text="Item:">
+      <Label layoutX="260.0" layoutY="229.0" text="Item:">
          <font>
             <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <ComboBox fx:id="cmbItem" layoutX="321.0" layoutY="251.0" prefHeight="31.0" prefWidth="253.0" />
-      <Label layoutX="215.0" layoutY="361.0" text="Quantidade:">
+      <ComboBox fx:id="cmbItem" layoutX="319.0" layoutY="226.0" prefHeight="31.0" prefWidth="253.0" />
+      <Label layoutX="213.0" layoutY="332.0" text="Quantidade:">
          <font>
             <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtTotal" disable="true" layoutX="321.0" layoutY="412.0" prefHeight="28.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
+      <TextField fx:id="txtTotal" disable="true" layoutX="319.0" layoutY="387.0" prefHeight="28.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="260.0" layoutY="414.0" text="Total:">
+      <Label layoutX="258.0" layoutY="389.0" text="Total:">
          <font>
             <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtQuantidade" layoutX="321.0" layoutY="360.0" onKeyPressed="#txtCodigo_lostFocusTab" prefHeight="25.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
+      <TextField fx:id="txtQuantidade" layoutX="319.0" layoutY="331.0" prefHeight="25.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
       </TextField>
-      <Button fx:id="btnRemoverCarrinho" layoutX="344.0" layoutY="467.0" mnemonicParsing="false" onAction="#btnRemoverCarrinho_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Remover" textFill="WHITE">
+      <Button fx:id="btnLimpar" layoutX="334.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnLimpar_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Limpar" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Button>
-      <Button fx:id="btnAdicionarCarrinho" layoutX="467.0" layoutY="467.0" mnemonicParsing="false" onAction="#btnAdicionarCarrinho_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Adicionar" textFill="WHITE">
+      <Button fx:id="btnAdicionarCarrinho" layoutX="457.0" layoutY="500.0" mnemonicParsing="false" onAction="#btnAdicionarCarrinho_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Adicionar" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="16.0" />
          </font>
       </Button>
+      <Label layoutX="190.0" layoutY="440.0" text="CPF do Cliente:">
+         <font>
+            <Font name="Segoe UI Semibold" size="16.0" />
+         </font>
+      </Label>
+      <TextField fx:id="txtCpfCliente" layoutX="319.0" layoutY="438.0" prefHeight="28.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>
