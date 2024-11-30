@@ -4,41 +4,8 @@ public class ItensPedido {
     private int id, pedidoId, produtoId, quantidade;
     private float preco;
     
-    // Construtor
-    public ItensPedido() {
-        
-    }
-    
-    public ItensPedido(int id, int pedidoId, int produtoId, int quantidade, float preco) {
-        this.id = id;
-        this.pedidoId = pedidoId;
-        this.produtoId = produtoId;
-        this.quantidade = quantidade;
-        this.preco = preco;
-    }
-    
-    // Equals e Hashcode
-    @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 19 * hash + Float.floatToIntBits(this.preco);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final ItensPedido other = (ItensPedido) obj;
-        return Float.floatToIntBits(this.preco) == Float.floatToIntBits(other.preco);
-    }
+    private String nomeProduto; // Nome do Produto
+    private Pedido pedido;      // Referência ao Pedido
 
     // Getters e Setters
     public int getId() {
@@ -79,5 +46,30 @@ public class ItensPedido {
 
     public void setPreco(float preco) {
         this.preco = preco;
+    }
+
+    public String getNomeProduto() {
+        return nomeProduto;
+    }
+
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
+    }
+
+    public Pedido getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
+    }
+
+    // Métodos intermediários para acessar dados de Pedido
+    public String getCpfCliente() {
+        return pedido != null ? pedido.getCpfCliente() : null;
+    }
+
+    public String getDataPedido() {
+        return pedido != null ? pedido.getDataPedido().toString() : null; // Convertendo para String
     }
 }

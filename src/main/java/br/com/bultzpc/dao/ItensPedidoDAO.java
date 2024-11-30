@@ -2,6 +2,9 @@ package br.com.bultzpc.dao;
 
 import br.com.bultzpc.model.ItensPedido;
 import br.com.bultzpc.conexao.Banco;
+import br.com.bultzpc.model.Pedido;
+import br.com.bultzpc.model.Produto;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,6 +19,8 @@ public class ItensPedidoDAO implements DAO<ItensPedido> {
 
     //variaveis auxiliares
     private ItensPedido itenspedido;
+    private Pedido pedido;
+    private Produto produto;
     //auxiliares para acesso aos dados
 
     //para conter os comandos DML
@@ -86,45 +91,52 @@ public class ItensPedidoDAO implements DAO<ItensPedido> {
         return null;
     }
 
-    public Collection<ItensPedido> lista(String criterio) throws SQLException {
-        //criar uma coleção
+   public Collection<ItensPedido> lista(String criterio) throws SQLException {
         Collection<ItensPedido> listagem = new ArrayList<>();
 
-        itenspedido = null;
+        // Comando SQL com joins
+        String sql = "SELECT i.id, i.pedidoId, i.produtoId, i.quantidade, i.preco, " +
+                     "p.cpfCliente, p.dataPedido, pr.nome AS nome_produto " +
+                     "FROM itenspedido i " +
+                     "INNER JOIN pedido p ON i.pedidoId = p.codigo " +
+                     "INNER JOIN produtos pr ON i.produtoId = pr.codigo ";
 
-        //Comando SELECT
-        String sql = "SELECT * FROM itenspedido ";
-        //colocar filtro ou nao
-        if (criterio.length() != 0) {
+        // Adicionar filtro, se necessário
+        if (criterio != null && !criterio.isEmpty()) {
             sql += "WHERE " + criterio;
         }
 
-        //conecta ao banco
+        // Conectar ao banco
         Banco.conectar();
-
         pst = Banco.obterConexao().prepareStatement(sql);
-
-        //Executa o comando SELECT
         rs = pst.executeQuery();
 
-        //le o próximo regitro
-        while (rs.next()) { //achou 1 registro
-            //cria o objeto veiculo
-            itenspedido = new ItensPedido();
+        // Preencher os resultados
+        while (rs.next()) {
+            // Criar um novo objeto Pedido
+            Pedido pedido = new Pedido();
+            pedido.setCpfCliente(rs.getString("cpfCliente"));
+            pedido.setDataPedido(rs.getDate("dataPedido"));
 
-            //move os dados do resultSet para o objeto veiculo
+            // Criar um novo objeto ItensPedido
+            ItensPedido itenspedido = new ItensPedido();
             itenspedido.setId(rs.getInt("id"));
             itenspedido.setPedidoId(rs.getInt("pedidoId"));
             itenspedido.setProdutoId(rs.getInt("produtoId"));
             itenspedido.setQuantidade(rs.getInt("quantidade"));
             itenspedido.setPreco(rs.getFloat("preco"));
 
-            //adicionar na coleção
+            // Adicionar o nome do produto
+            itenspedido.setNomeProduto(rs.getString("nome_produto"));
+
+            // Associar Pedido ao ItensPedido
+            itenspedido.setPedido(pedido);
+
+            // Adicionar na lista
             listagem.add(itenspedido);
         }
 
         Banco.desconectar();
-
         return listagem;
     }
 }

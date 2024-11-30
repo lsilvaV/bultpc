@@ -1,11 +1,14 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/javafx/FXMLController.java to edit this template
- */
 package br.com.bultzpc.controller;
+
+import br.com.bultzpc.dao.ItensPedidoDAO;
+import br.com.bultzpc.model.ItensPedido;
+import br.com.bultzpc.dao.PedidosDAO;
+
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.Collection;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,16 +17,16 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
-/**
- * FXML Controller class
- *
- * @author lucas
- */
 public class ConsultaPedidosController implements Initializable {
 
     @FXML
@@ -43,14 +46,41 @@ public class ConsultaPedidosController implements Initializable {
     @FXML
     private TextField txtCodigo;
     @FXML
-    private TextField txtCPF;
-
+    private ComboBox<String> cmbCondicao;
+    @FXML
+    private Button btnConsultar;
+    @FXML
+    private TableView<ItensPedido> tabelaPedidos;
+    @FXML
+    private TableColumn<ItensPedido, String> colCPFCliente;
+    @FXML
+    private TableColumn<ItensPedido, Integer> colIdPedido;
+    @FXML
+    private TableColumn<ItensPedido, String> colItemPedido;
+    @FXML
+    private TableColumn<ItensPedido, String> colDataPedido;
+    @FXML
+    private TableColumn<ItensPedido, Float> colPreco;
+    
+    private PedidosDAO pedidosDAO;
+    private ItensPedidoDAO itensPedidoDAO;
+    
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public void initialize(URL url, ResourceBundle rb) {       
+        itensPedidoDAO = new ItensPedidoDAO();
+        
+        // Configuração das colunas da tabela
+        colCPFCliente.setCellValueFactory(new PropertyValueFactory<>("cpfCliente"));
+        colIdPedido.setCellValueFactory(new PropertyValueFactory<>("pedidoId"));
+        colItemPedido.setCellValueFactory(new PropertyValueFactory<>("nomeProduto"));
+        colDataPedido.setCellValueFactory(new PropertyValueFactory<>("dataPedido"));
+        colPreco.setCellValueFactory(new PropertyValueFactory<>("preco"));
+        
+        // Configurando ComboBox
+        cmbCondicao.getItems().addAll("CPF do Cliente", "Data do Pedido");
     }
 
     @FXML
@@ -165,11 +195,45 @@ public class ConsultaPedidosController implements Initializable {
     }
 
     @FXML
-    private void txtCodigo_lostFocusTab(KeyEvent event) {
-    }
+    private void btnConsultar_click(ActionEvent event) {
+        String condicaoSelecionada = cmbCondicao.getValue(); // Obtém a condição selecionada
+        String inputValor = txtCodigo.getText(); // Valor inserido pelo usuário
+        String criterio = "";
 
-    @FXML
-    private void txtCPF_lostFocusTab(KeyEvent event) {
-    }
+        try {
+            if ("CPF do Cliente".equals(condicaoSelecionada)) {
+                if (!inputValor.isEmpty()) {
+                    criterio = "p.cpfCliente = '" + inputValor + "'"; // Inclui alias da tabela
+                }
+            } else if ("Data do Pedido".equals(condicaoSelecionada)) {
+                if (!inputValor.isEmpty()) {
+                    criterio = "p.dataPedido = '" + inputValor + "'"; // Inclui alias da tabela
+                }
+            }
 
+            // Chama o método lista com o critério
+            Collection<ItensPedido> resultados = itensPedidoDAO.lista(criterio);
+
+            // Atualiza a tabela com os resultados
+            atualizarTabela(resultados);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            mensagem("Erro ao consultar os pedidos." + e.getMessage());
+        }
+    }
+    
+    private void atualizarTabela(Collection<ItensPedido> resultados) {
+        tabelaPedidos.getItems().clear(); // Limpa os itens existentes na tabela
+        tabelaPedidos.getItems().addAll(resultados); // Adiciona os resultados retornados
+    }
+    
+    private void mensagem(String msg) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Mensagem");
+        alerta.setHeaderText(msg);
+        alerta.setContentText("");
+        
+        alerta.showAndWait();
+    }
 }
