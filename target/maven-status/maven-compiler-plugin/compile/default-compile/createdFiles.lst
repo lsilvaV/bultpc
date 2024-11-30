@@ -1,6 +1,7 @@
 br\com\bultzpc\controller\MenuController.class
 br\com\bultzpc\dao\ProdutosDAO.class
 br\com\bultzpc\model\Cliente.class
+br\com\bultzpc\estado\Estado.class
 br\com\bultzpc\controller\FuncionariosController.class
 br\com\bultzpc\model\Categoria.class
 br\com\bultzpc\dao\DAO.class
@@ -15,6 +16,5 @@ br\com\bultzpc\dao\ClientesDAO.class
 br\com\bultzpc\conexao\Banco.class
 br\com\bultzpc\Main.class
 br\com\bultzpc\controller\ClientesController.class
-br\com\bultzpc\dao\FuncionariosDAO.class
 br\com\bultzpc\model\Pedido.class
 br\com\bultzpc\model\Produto.class

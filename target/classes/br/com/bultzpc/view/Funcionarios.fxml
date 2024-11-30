@@ -67,7 +67,7 @@
             <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtCPF" layoutX="445.0" layoutY="80.0" onKeyPressed="#txtCPF_lostFocusTab" prefHeight="25.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
+      <TextField fx:id="txtCPF" layoutX="445.0" layoutY="80.0" prefHeight="25.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
          <font>
             <Font name="Segoe UI" size="14.0" />
          </font>
@@ -92,7 +92,6 @@
             <Font name="Segoe UI" size="14.0" />
          </font>
       </TextField>
-      <ComboBox fx:id="cmbCargo" layoutX="445.0" layoutY="260.0" prefHeight="30.0" prefWidth="200.0" />
       <Label layoutX="373.0" layoutY="263.0" text="Cargo:">
          <font>
             <Font name="Segoe UI Semibold" size="16.0" />
@@ -133,5 +132,15 @@
             <Image url="@assets/logo90.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnPesquisar" layoutX="740.0" layoutY="75.0" mnemonicParsing="false" onAction="#btnPesquisar_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Pesquisar" textFill="WHITE">
+         <font>
+            <Font name="Segoe UI" size="16.0" />
+         </font>
+      </Button>
+      <TextField fx:id="txtCargo" layoutX="445.0" layoutY="262.0" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #C0C1C4;">
+         <font>
+            <Font name="Segoe UI" size="14.0" />
+         </font>
+      </TextField>
    </children>
 </AnchorPane>

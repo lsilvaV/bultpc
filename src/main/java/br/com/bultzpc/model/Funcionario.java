@@ -1,6 +1,6 @@
 package br.com.bultzpc.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Funcionario {
     
@@ -88,5 +88,7 @@ public class Funcionario {
     public void setSalario(float salario) {
         this.salario = salario;
     }
+    
+    
     
 }
