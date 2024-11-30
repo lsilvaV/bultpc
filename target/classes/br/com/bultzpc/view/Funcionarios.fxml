@@ -62,52 +62,6 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Label layoutX="389.0" layoutY="82.0" text="CPF:">
-         <font>
-            <Font name="Segoe UI Semibold" size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtCPF" layoutX="445.0" layoutY="80.0" onKeyPressed="#txtCPF_lostFocusTab" prefHeight="25.0" prefWidth="253.0" style="-fx-background-color: #C0C1C4;">
-         <font>
-            <Font name="Segoe UI" size="14.0" />
-         </font>
-      </TextField>
-      <TextField fx:id="txtNome" layoutX="445.0" layoutY="140.0" prefHeight="25.0" prefWidth="350.0" style="-fx-background-color: #C0C1C4;">
-         <font>
-            <Font name="Segoe UI" size="14.0" />
-         </font>
-      </TextField>
-      <Label layoutX="372.0" layoutY="140.0" text="Nome:">
-         <font>
-            <Font name="Segoe UI Semibold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="273.0" layoutY="200.0" text="Data de Nascimento:">
-         <font>
-            <Font name="Segoe UI Semibold" size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtDataNasc" layoutX="445.0" layoutY="200.0" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #C0C1C4;">
-         <font>
-            <Font name="Segoe UI" size="14.0" />
-         </font>
-      </TextField>
-      <ComboBox fx:id="cmbCargo" layoutX="445.0" layoutY="260.0" prefHeight="30.0" prefWidth="200.0" />
-      <Label layoutX="373.0" layoutY="263.0" text="Cargo:">
-         <font>
-            <Font name="Segoe UI Semibold" size="16.0" />
-         </font>
-      </Label>
-      <Label layoutX="370.0" layoutY="320.0" text="Salário:">
-         <font>
-            <Font name="Segoe UI Semibold" size="16.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txtSalario" layoutX="445.0" layoutY="320.0" prefHeight="28.0" prefWidth="200.0" style="-fx-background-color: #C0C1C4;">
-         <font>
-            <Font name="Segoe UI" size="14.0" />
-         </font>
-      </TextField>
       <Button fx:id="btnDeletar" disable="true" layoutX="400.0" layoutY="415.0" mnemonicParsing="false" onAction="#btnDeletar_Click" prefHeight="38.0" prefWidth="110.0" style="-fx-background-color: linear-gradient(to right, #6A1E55 0%, #D03BA7 100%); -fx-border-radius: 10px;" text="Deletar" textFill="WHITE">
          <font>
             <Font name="Segoe UI" size="16.0" />
@@ -133,5 +87,14 @@
             <Image url="@assets/logo90.png" />
          </image>
       </ImageView>
+      <TableView layoutX="255.0" layoutY="124.0" prefHeight="269.0" prefWidth="619.0">
+        <columns>
+          <TableColumn fx:id="colunaNome" prefWidth="167.0" text="Nome" />
+          <TableColumn fx:id="colunaCPF" minWidth="0.0" prefWidth="94.0" text="CPF" />
+            <TableColumn fx:id="colunaDataNasc" minWidth="0.0" prefWidth="122.0" text="Data de Nascimento" />
+            <TableColumn fx:id="colunaCargo" minWidth="0.0" prefWidth="111.0" text="Cargo" />
+            <TableColumn fx:id="colunaSalario" minWidth="0.0" prefWidth="123.0" text="Salario" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

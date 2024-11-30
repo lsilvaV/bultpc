@@ -13,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -38,21 +39,21 @@ public class FuncionariosController {
     @FXML
     private Button btnConsulta;
     @FXML
-    private TextField txtCPF;
-    @FXML
-    private TextField txtNome;
-    @FXML
-    private TextField txtDataNasc;
-    @FXML
-    private ComboBox<?> cmbCargo;
-    @FXML
-    private TextField txtSalario;
-    @FXML
     private Button btnDeletar;
     @FXML
     private Button btnAlterar;
     @FXML
     private Button btnCadastrar;
+    @FXML
+    private TableColumn<?, ?> colunaNome;
+    @FXML
+    private TableColumn<?, ?> colunaCPF;
+    @FXML
+    private TableColumn<?, ?> colunaDataNasc;
+    @FXML
+    private TableColumn<?, ?> colunaCargo;
+    @FXML
+    private TableColumn<?, ?> colunaSalario;
 
     @FXML
     private void btnProdutos_Click(ActionEvent event) {
@@ -167,13 +168,6 @@ public class FuncionariosController {
         stage.close();
     }
 
-    @FXML
-    private void txtCPF_lostFocusTab(ActionEvent event) {
-    }
-
-    @FXML
-    private void txtCPF_lostFocusTab(KeyEvent event) {
-    }
 
     @FXML
     private void btnDeletar_Click(ActionEvent event) {

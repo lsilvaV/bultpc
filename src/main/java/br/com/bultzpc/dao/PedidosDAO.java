@@ -148,4 +148,23 @@ public class PedidosDAO implements DAO<Pedido> {
         // Retorna a lista de produtos
         return produtos;
     }
+    
+    public int buscarUltimoIdPedido() throws SQLException {
+        String sql = "SELECT MAX(codigo) AS ultimoId FROM pedido";
+        int ultimoId = 0;
+
+        // Conecta ao banco de dados
+        Banco.conectar();
+
+        try (PreparedStatement pst = Banco.obterConexao().prepareStatement(sql)) {
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                ultimoId = rs.getInt("ultimoId");
+            }
+        } finally {
+            Banco.desconectar();
+        }
+
+        return ultimoId;
+    }
 }

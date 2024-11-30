@@ -12,6 +12,7 @@ br\com\bultzpc\dao\PedidosDAO.class
 br\com\bultzpc\dao\ItensPedidoDAO.class
 br\com\bultzpc\controller\ProdutosController.class
 br\com\bultzpc\dao\ClientesDAO.class
+br\com\bultzpc\model\ItemCarrinho.class
 br\com\bultzpc\conexao\Banco.class
 br\com\bultzpc\Main.class
 br\com\bultzpc\controller\ClientesController.class
