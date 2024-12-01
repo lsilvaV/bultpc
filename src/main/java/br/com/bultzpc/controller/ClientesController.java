@@ -182,6 +182,9 @@ public class ClientesController implements Initializable {
 
     @FXML
     private void btnPesquisar_Click(ActionEvent event) {
+        if(txtCPF.getText().length() != 11)  {
+            mensagem("Digite um CPF válido");
+        }
         try {
             // Inicializa o objeto cliente se ele for nulo
             if (cliente == null) {

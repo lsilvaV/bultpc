@@ -8,9 +8,9 @@ import br.com.bultzpc.estado.Estado;
 import br.com.bultzpc.model.Funcionario;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.ResourceBundle;
@@ -23,17 +23,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
  *
  * @author lucas
  */
-public class FuncionariosController implements Initializable{
+public class FuncionariosController implements Initializable {
 
     @FXML
     private Button btnSair;
@@ -54,12 +52,11 @@ public class FuncionariosController implements Initializable{
     private TextField txtCPF;
     @FXML
     private TextField txtNome;
-    @FXML
-    private TextField txtDataNasc;
+
     @FXML
     private TextField txtSalario;
-    @FXML
 
+    @FXML
     private Button btnDeletar;
     @FXML
     private Button btnAlterar;
@@ -67,21 +64,13 @@ public class FuncionariosController implements Initializable{
     private Button btnPesquisar;
     @FXML
     private Button btnCadastrar;
-    @FXML
-    private TableColumn<?, ?> colunaNome;
-    @FXML
-    private TableColumn<?, ?> colunaCPF;
-    @FXML
-    private TableColumn<?, ?> colunaDataNasc;
-    @FXML
-    private TableColumn<?, ?> colunaCargo;
-    @FXML
-    private TableColumn<?, ?> colunaSalario;
 
     private ArrayList<Funcionario> funcionarios = new ArrayList<>();
     private Funcionario funcionario;
     @FXML
     private TextField txtCargo;
+    @FXML
+    private DatePicker dpDataNasc;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -209,6 +198,10 @@ public class FuncionariosController implements Initializable{
 
     @FXML
     private void btnPesquisar_Click(ActionEvent event) {
+
+        if (txtCPF.getText().length() != 11) {
+            mensagem("Digite um CPF válido");
+        }
         boolean encontrado = false; // Variável de controle
 
         try {
@@ -216,10 +209,15 @@ public class FuncionariosController implements Initializable{
                 if (f.getCpf().equals(txtCPF.getText())) {
                     encontrado = true;
                     txtNome.setText(f.getNome());
-                    SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-                    txtDataNasc.setText(formato.format(f.getDataNasc()));
-                    txtSalario.setText(String.valueOf(f.getSalario()));
+
+                    Date dataNasc = f.getDataNasc(); // A data que está em Date
+                    LocalDate localDate = dataNasc.toInstant() // Converte para Instant
+                            .atZone(ZoneId.systemDefault()) // Converte para o fuso horário do sistema
+                            .toLocalDate(); // Converte para LocalDate
+
+                    dpDataNasc.setValue(localDate); // Define o valor no DatePicker
                     txtCargo.setText(f.getCargo()); // Caso precise exibir o cargo
+                    txtSalario.setText(String.valueOf(f.getSalario()));
                     btnDeletar.setDisable(false);
                     btnAlterar.setDisable(false);
                     break; // CPF encontrado, não precisa continuar o loop
@@ -239,17 +237,93 @@ public class FuncionariosController implements Initializable{
         }
     }
 
-
     @FXML
     private void btnDeletar_Click(ActionEvent event) {
+        if (funcionario == null) {
+            funcionario = new Funcionario();
+        }
+        boolean encontrado = false;
+
+        try {
+            for (Funcionario f : funcionarios) {
+                if (f.getCpf().equals(txtCPF.getText())) {
+                    encontrado = true;
+                    funcionarios.remove(f);
+                    limparDados();
+                    desativarBotoes();
+                    break;
+                }
+            }
+            if (encontrado) {
+                mensagem("Usuário excluído com sucesso!");
+
+            }
+        } catch (Exception ex) {
+            mensagem("Erro na exclusão\n" + ex.getMessage());
+        }
+
     }
 
     @FXML
     private void btnAlterar_Click(ActionEvent event) {
+        if (funcionario == null) {
+            funcionario = new Funcionario();
+        }
+        boolean alterado = false;
+
+        try {
+            for (Funcionario f : funcionarios) {
+                if (f.getCpf().equals(txtCPF.getText())) {
+                    if (validarDados() == false){
+                        return;
+                    }
+                    f.setCpf(txtCPF.getText());
+                    f.setNome(txtNome.getText());
+                    f.setCargo(txtCargo.getText());
+                    LocalDate localDate = dpDataNasc.getValue();
+                    Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+                    f.setDataNasc(date);
+                    f.setCpf(txtCPF.getText());
+                    alterado = true;
+                    limparDados();
+                    desativarBotoes();
+                }
+            }
+            if (alterado) {
+                mensagem("Usuário alterado com sucesso!");
+            }
+        } catch (Exception ex) {
+            mensagem("Erro na alteração do funcionário \n" + ex.getMessage());
+        }
     }
 
     @FXML
     private void btnCadastrar_Click(ActionEvent event) {
+        
+        
+        if (validarDados() == false) {
+            return;
+        }
+        if (funcionario == null) {
+            funcionario = new Funcionario();
+        }
+        
+        try {
+            funcionario.setCpf(txtCPF.getText());
+            funcionario.setCargo(txtCargo.getText());
+            LocalDate localDate = dpDataNasc.getValue();
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            funcionario.setDataNasc(date);
+            funcionario.setNome(txtNome.getText());
+            funcionario.setSalario(Float.parseFloat(txtSalario.getText()));
+            funcionarios.add(funcionario);
+            limparDados();
+            desativarBotoes();
+            mensagem("Funcionário cadastrado com sucesso");
+        }catch(Exception ex){
+            mensagem("Não foi possível cadastrar o funcionário\n" + ex.getMessage());
+        }
+
     }
 
     private void mensagem(String msg) {
@@ -267,4 +341,33 @@ public class FuncionariosController implements Initializable{
         return calendario.getTime();
     }
 
+    public void limparDados() {
+        txtCPF.setText("");
+        txtNome.setText("");
+        txtCargo.setText("");
+        dpDataNasc.setValue(null);
+        txtSalario.setText("");
+        txtCPF.requestFocus();
+    }
+
+    public void desativarBotoes() {
+        btnAlterar.setDisable(true);
+        btnDeletar.setDisable(true);
+        btnCadastrar.setDisable(true);
+    }
+
+    public boolean validarDados() {
+        if (txtCPF.getText().length() == 0
+                || txtNome.getText().length() == 0
+                || dpDataNasc.getValue() == null
+                || txtSalario.getText().length() == 0) {
+            mensagem("Por favor, preencha todos os dados");
+            return false;
+        } else if (txtCPF.getText().length() != 11) {
+            mensagem("Digite um CPF válido");
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

@@ -87,11 +87,6 @@
             <Font name="Segoe UI Semibold" size="16.0" />
          </font>
       </Label>
-      <TextField fx:id="txtDataNasc" layoutX="445.0" layoutY="200.0" prefHeight="25.0" prefWidth="170.0" style="-fx-background-color: #C0C1C4;">
-         <font>
-            <Font name="Segoe UI" size="14.0" />
-         </font>
-      </TextField>
       <Label layoutX="373.0" layoutY="263.0" text="Cargo:">
          <font>
             <Font name="Segoe UI Semibold" size="16.0" />
@@ -142,5 +137,6 @@
             <Font name="Segoe UI" size="14.0" />
          </font>
       </TextField>
+      <DatePicker fx:id="dpDataNasc" layoutX="443.0" layoutY="200.0" />
    </children>
 </AnchorPane>
