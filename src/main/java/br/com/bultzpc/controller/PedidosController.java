@@ -32,7 +32,6 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 public class PedidosController implements Initializable {
@@ -297,6 +296,7 @@ public class PedidosController implements Initializable {
 
             // Sucesso
             mensagem("Pedido cadastrado com sucesso!");
+            txtCpfCliente.setText("");
 
             // Limpeza
             carrinho.clear(); // Limpa o carrinho
@@ -305,7 +305,9 @@ public class PedidosController implements Initializable {
             somaTotal = 0.0f; // Reinicia a soma total
             
         } catch (SQLException ex) {
-            mensagem("Erro ao cadastrar pedido: " + ex.getMessage());
+            mensagem("Não há cliente com o cpf digitado.");
+            txtCpfCliente.setText("");
+            
         }
     }
 

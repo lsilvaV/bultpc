@@ -23,7 +23,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -63,7 +62,6 @@ public class ProdutosController implements Initializable {
     private Button btnPesquisar;
 
     private Produto produto;
-    private Categoria categoria;
     private ProdutosDAO produtosDAO = new ProdutosDAO();
     private ObservableList<Categoria> listaProdutos =  
             FXCollections.observableArrayList(); 
@@ -261,7 +259,7 @@ public class ProdutosController implements Initializable {
         try {
             if (produto == null) {
                 produto = new Produto();
-                categoria = new Categoria();
+                
             }
 
             produto.setCodigo(Integer.parseInt(txtCodigo.getText()));
@@ -280,12 +278,14 @@ public class ProdutosController implements Initializable {
                         break;
                     }
                 }  
-                txtDescricao.setText(produto.getDescricao());    
-                desativarBotoes();
+                txtDescricao.setText(produto.getDescricao());
+                btnAlterar.setDisable(false);
+                btnDeletar.setDisable(false);
                 
             } else {
                 mensagem("Produto não encontrado. Faça o cadastro do produto.");
                 desativarBotoes();
+                btnCadastrar.setDisable(false);
                 limparDadosPesquisa();
             }
         } catch (SQLException ex) {
